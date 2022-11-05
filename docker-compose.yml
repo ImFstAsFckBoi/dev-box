@@ -1,0 +1,16 @@
+version: '3.0'
+
+services:
+  dev-box:
+    image: dev-box
+    container_name: dev-box
+
+    stdin_open: true
+    tty: true
+
+    network_mode: host
+
+    volumes:
+      - "$USERPROFILE\\dev-box\\.vscode-server:/home/dev/.vscode-server/:rw"
+      - "$USERPROFILE\\dev-box\\.ssh:/home/dev/.ssh/:rw"
+      - "$USERPROFILE\\dev-box\\sync:/home/dev/sync/:rw"

@@ -1,0 +1,23 @@
+# any valid apk packages
+# ignores lines with #
+
+neofetch
+
+#sudo
+doas
+
+mandoc man-pages
+
+htop git
+
+bash bash-completion
+
+nano vim
+#micro
+
+make
+#cmake
+
+gcc
+#nodejs
+#python3
