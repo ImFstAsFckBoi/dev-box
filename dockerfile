@@ -1,5 +1,6 @@
 FROM alpine:latest
 
+VOLUME [ “/sys/fs/cgroup” ]
 
 ### Install packages from apk-list.txt
 RUN apk update
@@ -10,7 +11,6 @@ RUN apk add $(cat /tmp/apk-list.txt | sed "/#/d" | xargs | tr '\r\n' ' ' | tr '\
 
 # build required packages
 RUN apk add zsh curl openrc
-
 
 
 ### Add dev user
