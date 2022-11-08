@@ -13,11 +13,13 @@ htop git
 bash bash-completion
 
 nano vim
-#micro
+micro
 
 make
-#cmake
+cmake
 
-gcc
+gcc g++ 
+gdb 
+#clang lldb
 #nodejs
 #python3

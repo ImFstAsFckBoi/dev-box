@@ -1,0 +1,11 @@
+
+
+### .zshrc-tail ###
+
+
+alias bake="make && echo 'Bread is done!'"
+alias sudo="doas"
+
+function dsh() {
+    sudo docker exec -it $1 sh
+}
