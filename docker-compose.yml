@@ -2,7 +2,7 @@ version: '3.0'
 
 services:
   dev-box:
-    image: dev-box
+    build: .
     container_name: dev-box
     hostname: dev-box
     stdin_open: true
