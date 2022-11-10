@@ -2,6 +2,7 @@ where.exe git > nul 2> nul; $has_git = $?
 where.exe docker > nul 2> nul; $has_docker = $?
 where.exe docker-compose > nul 2> nul; $has_dcompose = $?
 
+Remove-Item -Path "$env:TEMP\dev-box\" -Recurse -Force -ErrorAction SilentlyContinue > nul 2> nul
 
 if ( !( $has_docker -and $has_dcompose ) ) {
     Write-Error "Docker and/or Docker-Compose is not installed."
@@ -10,11 +11,9 @@ if ( !( $has_docker -and $has_dcompose ) ) {
     Exit 1
 }
 
-
 $old_dir = Get-Location
 
-New-Item -Path "$env:TEMP\dev-box\" -ItemType Directory -ErrorAction SilentlyContinue
-Set-Location -Path  $env:TEMP\dev-box\
+New-Item -Path "$env:TEMP\dev-box\" -ItemType Directory -ErrorAction SilentlyContinue > nul 2> nul
 
 
 if ( $has_git) {
@@ -22,12 +21,6 @@ if ( $has_git) {
     Write-Host "Detected git installation"
     Write-Host "Cloning git repo........." -NoNewline
     git clone https://github.com/ImFstAsFckBoi/dev-box.git > nul 2>nul
-
-    if ( -not $? ) {
-        Write-Host "FAILED!"
-        Write-Error "Failed to clone git repo!"
-    }
-
     Write-Host "DONE!"
 } else {
     # Download with curl
@@ -61,12 +54,12 @@ if ( (docker-compose ls --all | findstr "dev-box") ) {
 }
 
 Write-Host "Starting container......." -NoNewline
-docker-compose up -d > nul
+docker-compose up --build -d > nul
 Write-Host "DONE!"
 
 
 if ( -not $? ) {
-    Write-Host ""
+    Write-Host "FAILED!"
     Write-Error "Failed to bring up container with command 'docker-compose up -d'"
 }
 
