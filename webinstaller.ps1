@@ -1,4 +1,4 @@
-where.exe git > nul 2> nul; $has_git = $?
+where.exe agit > nul 2> nul; $has_git = $?
 where.exe docker > nul 2> nul; $has_docker = $?
 where.exe docker-compose > nul 2> nul; $has_dcompose = $?
 
@@ -14,7 +14,7 @@ if ( !( $has_docker -and $has_dcompose ) ) {
 $old_dir = Get-Location
 
 New-Item -Path "$env:TEMP\dev-box\" -ItemType Directory -ErrorAction SilentlyContinue > nul 2> nul
-
+Set-Location -Path $env:TEMP\dev-box\
 
 if ( $has_git) {
     # Download with git
