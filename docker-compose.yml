@@ -3,8 +3,8 @@ version: '3.0'
 services:
   dev-box:
     build: .
-    container_name: dev-box
-    hostname: dev-box
+    container_name: dev-box-test
+    hostname: dev-box-test
     stdin_open: true
     tty: true
 

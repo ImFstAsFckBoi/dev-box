@@ -12,7 +12,6 @@ RUN apk add $(cat /tmp/apk-list.txt | sed "/#/d" | xargs | tr '\r\n' ' ' | tr '\
 # build required packages
 RUN apk add zsh curl openrc
 
-
 ### Add dev user
 RUN adduser -h /home/dev/ -G wheel -S -s /bin/zsh dev
 RUN echo "%wheel ALL=(ALL:ALL) NOPASSWD: ALL" >> /etc/sudoers; exit 0
@@ -28,10 +27,11 @@ COPY ./.gitconfig ./
 RUN mkdir .ssh .vscode-server sync
 RUN chmod +rw .ssh .vscode-server sync .gitconfig
 
-### Set up zsh with oh-my-zsh
 USER dev
-RUN sh -c "$(curl -fsSL https://raw.github.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+COPY ./run.sh /tmp/
+RUN sh /tmp/run.sh
+### Set up zsh with oh-my-zsh
 RUN sed -i '1,/ZSH_THEME=.*/{s/ZSH_THEME=.*/ZSH_THEME="itchy"/}' ./.zshrc
-COPY ./.zshrc-tail /tmp/.zshrc-tail
-RUN cat /tmp/.zshrc-tail >> ./.zshrc
+COPY ./rc-tail.txt /tmp/
+RUN cat /tmp/rc-tail.txt >> ./.zshrc
 
