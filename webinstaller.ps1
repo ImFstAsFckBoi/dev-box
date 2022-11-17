@@ -1,4 +1,4 @@
-where.exe agit > nul 2> nul; $has_git = $?
+where.exe git > nul 2> nul; $has_git = $?
 where.exe docker > nul 2> nul; $has_docker = $?
 where.exe docker-compose > nul 2> nul; $has_dcompose = $?
 
